@@ -1,7 +1,7 @@
 Personal Project Proposal
 
 Description:
-A monthly budget app where users can input their expenses into a table, and see how much they have remaining on a calendar. Possibly set their monthly income and a savings goal.
+A monthly budget app where users can input their expenses into a table, and see how much they have remaining on a calendar. Possibly set a savings goal.
 
 Stack: Python / Django
 
@@ -14,6 +14,9 @@ Feature List:
 (Time permitting) Extra features:
 - form for adding/editing goals
 - savings goal progress bar
+
+For MVP project, see project_wireframe.pdf
+For extra features, see project_wireframe_expanded.pdf
 
 GitHub link:
 https://github.com/sdress/p-a-solo-project
