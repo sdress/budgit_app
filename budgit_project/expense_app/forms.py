@@ -17,8 +17,8 @@ class ExpenseForm(forms.ModelForm):
                 'type': 'text',
                 'class': 'form-control',
             }),
-            'amount': forms.IntegerField(attrs={
-                'type': 'integer',
+            'amount': forms.NumberInput(attrs={
+                'type': 'number',
                 'class': 'form-control',
             }),
             'category': forms.Select(attrs={

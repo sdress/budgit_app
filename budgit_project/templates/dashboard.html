@@ -23,29 +23,7 @@
     </nav>
 
     <div class="container">
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Expense Name</th>
-                    <th>Amount</th>
-                    <th>Category</th>
-                    <th>Recurring?</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    {% for d in data %}
-                    <td>{{ d }}</td>
-                    {% endfor %}
-                </tr>
-                <tr class="table-danger">
-                    <td><b>EXPENSE TOTAL</b></td>
-                    <td colspan="3">SUM</td>
-                </tr>
-            </tbody>
-        </table>
-
+        {% block content %}{% endblock %}
         <a href="{% url 'expense_form' %}">Add an Expense</a>
     </div>
 </body>
