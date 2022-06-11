@@ -1,3 +1,4 @@
+from sre_parse import CATEGORIES
 from django.db import models
 
 # Create your models here.
@@ -25,4 +26,7 @@ class Expense(models.Model):
     category = models.CharField(max_length = 50,choices=CATEGORIES, blank=True, editable=True)
     # default form widget is checkboxinput
     # source: https://docs.djangoproject.com/en/4.0/ref/models/fields/#booleanfield
-    recurring = models.BooleanField(default='No', null=False, editable=True)
+    recurring = models.BooleanField(default='False', null=False, editable=True)
+
+    def get_choices(self):
+        return list(Expense.CATEGORIES)

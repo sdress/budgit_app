@@ -14,6 +14,7 @@
 
 <div class="container">
     <form method="post">
+        {% csrf_token %}
         <div class="mb-3">
             <label for="name" class="form-label">Expense Name</label>
             <input type="text" class="form-control" name="name">
@@ -26,14 +27,14 @@
         <div class="mb-3">
             <label for="category">Select Category</label>
             <select name="category">
-                {% for model.category in model %}
-                <option>{{model.category}}</option>
+                {% for category in model.get_choices %}
+                <option>{{category}}</option>
                 {% endfor %}
             </select>
         </div>
         <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            <input type="checkbox" class="form-check-input" name="recurring">
+            <label class="form-check-label" for="exampleCheck1">Recurring Expense</label>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
