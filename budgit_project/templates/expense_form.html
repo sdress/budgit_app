@@ -13,7 +13,7 @@
     <!--End Navbar -->
 
 <div class="container">
-    <form method="post">
+    <form method="post" action="{% url 'save_expense' %}">
         {% csrf_token %}
         <div class="mb-3">
             <label for="name" class="form-label">Expense Name</label>

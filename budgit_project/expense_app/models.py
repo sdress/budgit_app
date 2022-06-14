@@ -1,5 +1,7 @@
+from sre_constants import LITERAL
 from sre_parse import CATEGORIES
 from django.db import models
+from django.db.models import Sum
 
 # Create your models here.
 class User(models.Model):
@@ -29,4 +31,8 @@ class Expense(models.Model):
     recurring = models.BooleanField(default='False', null=False, editable=True)
 
     def get_choices(self):
-        return list(Expense.CATEGORIES)
+        return list(Expense.get_choices_display)
+    
+    def get_total():
+        total = Expense.objects.aggregate(Sum('amount'))['amount__sum']
+        return total
