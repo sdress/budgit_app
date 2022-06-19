@@ -25,12 +25,12 @@
     <form method="post" action="{% url 'save_expense' %}">
         {% csrf_token %}
         <div class="mb-3">
-            <label for="name" class="form-label">Expense Name</label>
+            <label for="name" class="form-label" value={{exp.name}}>Expense Name</label>
             <input type="text" class="form-control" name="name">
             <div id="nameHelp" class="form-text">Please provide a specific, informative name</div>
         </div>
         <div class="mb-3">
-            <label for="amount" class="form-label">Amount</label>
+            <label for="amount" class="form-label" value={{exp.amount}}>Amount</label>
             $ <input type="number" class="form-control" name="amount">
         </div>
         <div class="mb-3">

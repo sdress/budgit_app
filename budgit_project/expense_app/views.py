@@ -1,5 +1,6 @@
 from queue import Empty
 from django.shortcuts import redirect, render
+from django.contrib import messages
 from django.views import generic
 from django.urls import reverse_lazy
 
@@ -17,28 +18,30 @@ def dashboard(request):
         'data': data,
         'total': Expense.get_total()
     }
-    # print(context['data'])
+    print(context['data'])
     return render(request, 'dashboard.html', context)
 
 def add_expense(request):
     context = {
         "page_name": 'Add an Expense',
-        'model': Expense,
+        'categories': Expense.get_choices(),
     }
     return render(request, "expense_form.html", context)
 
 def save_expense(request):
-    if request.POST['recurring'] == 'on':
-        response = 'yes'
+    errors = Expense.objects.validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect('expense_form')
     else:
-        response = 'no'
+        Expense.objects.create(name=request.POST['name'], amount=int(request.POST['amount']), category=request.POST['category'], recurring=request.POST['recurring'])
+        return redirect('dashboard')
+
+def edit_expense(request, id):
     context = {
-        'name': request.POST['name'],
-        'amount': request.POST['amount'],
-        'category': request.POST['category'],
-        'recurring': response,
+        'page_name': 'Edit Expense',
+        'exp': Expense.objects.get(id=id),
+        'categories': Expense.get_choices(),
     }
-    # new_exp = models.Expense(name=request.POST['name'], amount=request.POST['amount'], category=request.POST['category'], recurring=request.POST['recurring'] == 'on')
-    new_exp = Expense(context)
-    new_exp.save()
-    return redirect('dashboard')
+    return render(request, 'expense_edit.html', context)

@@ -9,12 +9,20 @@
 	outline: 0;
 	padding: 0;
 	margin: 0;
+    background-color: #E0DECA;
 	}
 
-#bootstrap-override{
+#color-palette{
+    background-color: #9EB23B;
     background-color: #C7D36F;
+    background-color: #FCF9C6;
+    background-color: #E0DECA;
 }
 
-#header-nav{
+body #bootstrap-override{
     background-color: #9EB23B;
+}
+
+nav #header-nav{
+    background-color: #C7D36F;
 }
