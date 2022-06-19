@@ -1,10 +1,10 @@
-from queue import Empty
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.views import generic
 from django.urls import reverse_lazy
 
-from .models import Expense, User
+from .models import Expense
+from users_app.models import User
 from . import forms
 
 # class ExpenseListView(generic.ListView):
@@ -13,12 +13,13 @@ from . import forms
 
 def dashboard(request):
     data = Expense.objects.all()
+    user = User.objects.get(id=request.session['id'])
     context = {
-        'user': 'Sarah',
+        'user': user.name,
         'data': data,
         'total': Expense.get_total()
     }
-    print(context['data'])
+    # print(context['data'])
     return render(request, 'dashboard.html', context)
 
 def add_expense(request):

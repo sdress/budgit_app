@@ -1,37 +1,10 @@
-from multiprocessing.sharedctypes import Value
+from multiprocessing import Value
 from queue import Empty
-from sre_constants import LITERAL
-from sre_parse import CATEGORIES
-from uuid import uuid1
 from django.db import models
+from users_app.models import User
 from django.db.models import Sum
-import re
-import bcrypt
-from django.forms import NumberInput
 
 # Create your models here.
-
-class UserManager(models.Manager):
-    def login_validator(self, postData):
-        errors = {}
-        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-        if len(postData['name']) < 2:
-            errors['name'] = 'Name must be at least 2 characters'
-        if not EMAIL_REGEX.match(postData['email']):
-            errors['email'] = 'Please enter a valid email address!'
-        
-        return errors
-
-class User(models.Model):
-    # id = models.UUIDField(
-    #     primary_key=True,
-    #     default=uuid1,
-    #     editable=False
-    # )
-    # name = models.CharField(max_length=255, blank=False)
-    # email = models.EmailField(max_length=255, blank=False)
-    # password = models.CharField(max_length=128, blank=False)
-    pass
 
 class ExpenseManager(models.Manager):
     def validator(self, postData):
@@ -72,7 +45,7 @@ class Expense(models.Model):
     # default form widget is checkboxinput
     # source: https://docs.djangoproject.com/en/4.0/ref/models/fields/#booleanfield
     recurring = models.BooleanField(default='False', null=False, editable=True)
-    # user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
     objects = ExpenseManager()
 
     def get_choices():
