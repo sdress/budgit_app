@@ -1,8 +1,8 @@
 import bcrypt
 from django.shortcuts import redirect, render
-from django.contrib import messages
+from django.contrib import messages, sessions
 from .models import User, UserManager
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 def index(request):
@@ -18,25 +18,32 @@ def reg_user(request):
             messages.error(request,value)
         return redirect('show_reg')
     else:
-        request.session['id'] = request.POST['id']
         password = request.POST['password']
         pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
-        User.objects.create(
-            id = request.session['id'],
+        user = User.objects.create(
             name = request.POST['name'],
             email = request.POST['email'],
             password = pw_hash,
         )
+        request.session['user_id'] = user.id
         return redirect('dashboard')
 
 def show_login(request):
     return render(request, 'login_form.html')
 
 def login_user(request):
-    email = request.POST['email']
-    password = request.POST['password']
-    user = authenticate(request, email=email, password = password)
+    user_email = request.POST['email']
+    user_password = request.POST['password']
+    pw_hash = bcrypt.hashpw(user_password.encode(), bcrypt.gensalt()).decode()
+    user = authenticate(email=user_email, password = pw_hash)
     if user is not None:
         login(request, user)
         return redirect('dashboard')
-    return redirect('')
+    else:
+        messages.add_message(request, messages.INFO, 'Unable to login, please try again')
+        return redirect('show_login')
+
+def logout_user(request):
+    logout(request)
+    request.session.clear()
+    return redirect('index')

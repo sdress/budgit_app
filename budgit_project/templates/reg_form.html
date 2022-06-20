@@ -10,7 +10,7 @@
     <!-- connect to static folder css file -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body>
+<body class="home-body">
     <div class="alert">
         {% if messages %}
         <div class="messages">    
@@ -21,11 +21,11 @@
         {% endif %}
     </div>
     <div class="container-fluid">
-        <div class="form-row row">
-            <div class="reg-form col-lg-5">
+            <div class="reg-form">
                 <h1>Register</h1>
                 <form action="{% url 'create_user' %}" method="post">
                     {% csrf_token %}
+                    <input type="hidden" name="id">
                     <div class="form-group row">
                         <label for="first_name" class="col-sm-4 col-form-label">Name: </label>
                         <div class="col-sm-6">
@@ -53,7 +53,6 @@
                     <input class="btn btn-success" type="submit"></input>
                 </form>
             </div>
-        </div>
     </div>
 </body>
 </html>

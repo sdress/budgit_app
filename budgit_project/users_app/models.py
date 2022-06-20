@@ -27,11 +27,7 @@ class UserManager(models.Manager):
         return errors
 
 class User(models.Model):
-    # id = models.UUIDField(
-    #     primary_key=True,
-    #     default=uuid1,
-    #     editable=False
-    # )
+    id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=255, blank=False)
     email = models.EmailField(max_length=255, blank=False)
     password = models.CharField(max_length=128, blank=False)
