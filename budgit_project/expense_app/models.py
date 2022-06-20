@@ -52,6 +52,10 @@ class Expense(models.Model):
         return list(Expense.CATEGORIES)
         # return Expense.get_category_display()
     
-    def get_total():
-        total = Expense.objects.aggregate(Sum('amount'))['amount__sum']
+
+    def get_total(current_user):
+        all_expenses = Expense.objects.filter(user=current_user)
+        total = all_expenses.aggregate(Sum('amount'))['amount__sum']
+        if (total==None):
+            total = 0
         return total

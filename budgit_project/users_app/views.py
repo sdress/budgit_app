@@ -35,11 +35,14 @@ def login_user(request):
     user_email = request.POST['email']
     user_password = request.POST['password']
     pw_hash = bcrypt.hashpw(user_password.encode(), bcrypt.gensalt()).decode()
-    user = authenticate(email=user_email, password = pw_hash)
+    user = authenticate(request, email=user_email, password = pw_hash)
     if user is not None:
+        print('Line 40: User is not None')
         login(request, user)
+        print('Made it to login')
         return redirect('dashboard')
     else:
+        print('Line 45: user is None')
         messages.add_message(request, messages.INFO, 'Unable to login, please try again')
         return redirect('show_login')
 

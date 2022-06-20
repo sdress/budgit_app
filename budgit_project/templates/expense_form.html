@@ -24,7 +24,7 @@
         </div>
     {% endif %}
     <!-- end validation msgs-->
-    <form method="post" action="{% url 'save_expense' %}">
+    <form method="post" action="{% url 'create_expense' %}">
         {% csrf_token %}
         <input type="hidden" name="user" value="{{user}}">
         <div class="mb-3">

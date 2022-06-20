@@ -12,15 +12,15 @@ from . import forms
 #     model = models.Expense
 #     form_class = forms.ExpenseForm
 
-# @login_required
+@login_required(redirect_field_name='index', login_url='/login')
 def dashboard(request):
-    data = Expense.objects.all()
-    print(request.session['user_id'])
-    user = User.objects.get(id=request.session['user_id'])
+    # print(request.session['user_id'])
+    current_user = User.objects.get(id=request.session['user_id'])
+    data = Expense.objects.filter(user=current_user)
     context = {
-        'user': user,
+        'user': current_user,
         'data': data,
-        'total': Expense.get_total()
+        'total': Expense.get_total(current_user)
     }
     # print(context['data'])
     return render(request, 'dashboard.html', context)
@@ -33,7 +33,7 @@ def add_expense(request):
     }
     return render(request, "expense_form.html", context)
 
-def save_expense(request):
+def create_expense(request):
     errors = Expense.objects.validator(request.POST)
     if len(errors) > 0:
         for key, value in errors.items():
