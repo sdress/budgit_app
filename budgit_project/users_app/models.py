@@ -5,7 +5,7 @@ from django.contrib.auth.hashers import check_password
 # Create your models here.
 
 class UserManager(models.Manager):
-    def validator(self, postData):
+    def reg_validator(self, postData):
         errors = {}
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         if len(postData['username']) < 2:
@@ -22,12 +22,13 @@ class UserManager(models.Manager):
 
     def login_validator(self, postData):
         errors = {}
-        try:
-            User.objects.get(email=postData['email'])
-        except User.DoesNotExist:
-            errors['email'] = 'Email does not exist'
-            return errors
-        user = User.objects.get(email=postData['email'])
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        if len(postData['username']) < 2:
+            errors['username'] = 'Please provide username'
+        if not EMAIL_REGEX.match(postData['email']):
+            errors['email'] = 'Please enter a valid email address'
+        if len(postData['password']) < 8:
+            errors['password'] = 'Password must be at least 8 characters.'
         # print(user.password)
         # if check_password(postData['password'], user.password):
         #     print(check_password(postData['password'], user.password))
