@@ -12,7 +12,7 @@ class ExpenseManager(models.Manager):
             errors['name'] = 'Name must be at least 2 characters'
         if len(postData['amount']) < 1:
             errors['amount'] = 'Please input an amount'
-        if postData['recurring'] == Empty:
+        if postData['recurring'] == None:
             errors['recurring'] = 'Please make a selection'
         return errors
 
@@ -36,21 +36,21 @@ class Expense(models.Model):
     #     default=uuid1,
     #     editable=False
     # )
+    id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=50, blank=False, editable=True)
     amount = models.IntegerField(blank=False, editable=True)
     category = models.CharField(max_length = 50,choices=CATEGORIES, blank=True, editable=True)
-    # default form widget is checkboxinput
-    # source: https://docs.djangoproject.com/en/4.0/ref/models/fields/#booleanfield
     recurring = models.BooleanField(default='False', null=False, editable=True)
     # relationship
     user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
+
     # connect to ModelManager
     objects = ExpenseManager()
 
     def get_choices():
         choice_list = []
         for choice in Expense.CATEGORIES:
-            print(choice)
+            # print(choice)
             choice_list.append(choice[1])
         return choice_list
         # return Expense.get_category_display()

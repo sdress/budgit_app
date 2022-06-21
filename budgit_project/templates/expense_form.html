@@ -37,14 +37,15 @@
             <input type="number" class="form-control" name="amount">
         </div>
         <div class="mb-3">
-            <label for="category">Select Category</label>
-            <select name="category">
+            <label for="category" class="form-label">Select Category</label>
+            <select name="category" class="form-control">
                 {% for category in categories %}
                 <option>{{category}}</option>
                 {% endfor %}
             </select>
         </div>
         <label class="form-check-label">Recurring Expense?</label>
+        <br>
         <div class="mb-3 form-check">
             <input class="form-check-input" type="radio" name="recurring" value="True">
             <label class="form-check-label" for="recurring">

@@ -12,19 +12,21 @@ def show_reg(request):
     return render(request, 'reg_form.html')
 
 def reg_user(request):
-    errors = User.objects.reg_validator(request.POST)
+    errors = User.objects.validator(request.POST)
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request,value)
         return redirect('show_reg')
     else:
-        password = request.POST['password']
-        pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
         user = User.objects.create(
+            username = request.POST['username'],
             name = request.POST['name'],
             email = request.POST['email'],
-            password = pw_hash,
+            password = request.POST['password']
         )
+        user.is_active = True
+        # user.set_password(request.POST['password'])
+        print(user)
         request.session['user_id'] = user.id
         return redirect('dashboard')
 
@@ -38,8 +40,10 @@ def login_user(request):
             messages.error(request, value)
         return redirect('show_login')
     else:
+        user_check = authenticate(request, username=request.POST['username'], password=request.POST['password'])
+        print(user_check)
         user = User.objects.get(email=request.POST['email'])
-        print('User validated')
+        # print(User.objects.get(id=1))
         request.session['user_id'] = user.id
         return redirect('dashboard')
 

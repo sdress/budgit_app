@@ -19,26 +19,51 @@
 }
 
 body{
-    background-color: #E5E3C9;
+    background-color: #E5E3C9 !important;
+}
+
+.index-body{
+	background-image: url('pexels-coins.jpg');
+	width: 100%;
+	height: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.jumbotron-fluid{
+	background-color: #B4CFB0;
+	margin-top: 5%;
+	padding: 2%;
+	border-radius: 2em;
 }
 
 .navbar {
-    background-color: #94B49F;	
+    background-color: #94b49f;	
 	margin-bottom: 2%;
+	padding: 2% 5%;
 }
 
 .table-container{
 	background-color: #B4CFB0;
 	padding: 2em;
-	border-radius: 5px;
+	border-radius: 2em;
 }
 
-form{
+form {
 	background-color: #B4CFB0;
 	padding: 2em;
-	border-radius: 5px;
+	border-radius: 2em;
 }
 
-.home-body{
-	background-color: #B4CFB0;
+.form-title{
+	margin-bottom: 2%;
 }
+
+.btn-span{
+	display: flex;
+	justify-content: space-between;
+}
+
+/* .home-body{
+	background-color: #B4CFB0;
+} */

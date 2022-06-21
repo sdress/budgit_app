@@ -60,7 +60,10 @@
             </label>
         </div>
         <input type="hidden" name="user" value="{{ user }}">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="btn-span">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="{% url 'delete_expense' exp.id %}" class="btn btn-danger">Delete</a>
+        </div>
     </form>
 </div>
 
