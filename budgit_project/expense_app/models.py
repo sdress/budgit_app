@@ -12,7 +12,7 @@ class ExpenseManager(models.Manager):
             errors['name'] = 'Name must be at least 2 characters'
         if len(postData['amount']) < 1:
             errors['amount'] = 'Please input an amount'
-        if postData['recurring'] == Empty:
+        if postData['recurring'] == None:
             errors['recurring'] = 'Please make a selection'
         return errors
 
@@ -50,7 +50,7 @@ class Expense(models.Model):
     def get_choices():
         choice_list = []
         for choice in Expense.CATEGORIES:
-            print(choice)
+            # print(choice)
             choice_list.append(choice[1])
         return choice_list
         # return Expense.get_category_display()

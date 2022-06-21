@@ -71,3 +71,8 @@ def update_expense(request):
         exp.recurring = request.POST['recurring']
         exp.save()
         return redirect('dashboard')
+
+def destroy_expense(request, id):
+    exp = Expense.objects.get(id=id)
+    exp.delete()
+    return redirect('dashboard')

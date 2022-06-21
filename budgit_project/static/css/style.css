@@ -19,12 +19,14 @@
 }
 
 body{
-    background-color: #E5E3C9;
+    background-color: #E5E3C9 !important;
 }
 
 .navbar {
-    background-color: #94B49F;	
+    /* background-color: #94b49fb9;	 */
+	background-color: rebeccapurple;
 	margin-bottom: 2%;
+	padding: 5%;
 }
 
 .table-container{
@@ -33,12 +35,17 @@ body{
 	border-radius: 5px;
 }
 
-form{
+form, .reg-form, .login-form {
 	background-color: #B4CFB0;
 	padding: 2em;
 	border-radius: 5px;
 }
 
-.home-body{
-	background-color: #B4CFB0;
+.btn-span{
+	display: flex;
+	justify-content: space-between;
 }
+
+/* .home-body{
+	background-color: #B4CFB0;
+} */
