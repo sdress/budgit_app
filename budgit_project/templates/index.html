@@ -9,17 +9,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body>
+<body class="index-body">
     <div class="container">
 
-        <div class="jumbotron">
+        <div class="jumbotron-fluid">
             <h1 class="display-4">Welcome to Budg-It!</h1>
-            <p class="lead">This is a simple budget app for tracking expenses and setting savings goals. Built for first-time budgeters and penny-pinching masters alike.</p>
+            <p class="lead">This is a simple budget app for tracking expenses. Built for first-time budgeters and penny-pinching masters alike.</p>
             <hr class="my-4">
             <p>Please sign in to your account, or register a new one!</p>
             <p class="lead">
-                <a class="btn btn-primary btn-lg" href="{% url 'show_login' %}" role="button">Sign In</a>
-                <a class="btn btn-success btn-lg" href="{% url 'show_reg' %}" role="button">Register</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'show_login' %}">Sign In</a>
+                <a class="btn btn-success btn-lg" href="{% url 'show_reg' %}">Register</a>
             </p>
         </div>
     </div>
