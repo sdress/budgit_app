@@ -32,19 +32,16 @@ def show_login(request):
     return render(request, 'login_form.html')
 
 def login_user(request):
-    user_email = request.POST['email']
-    user_password = request.POST['password']
-    pw_hash = bcrypt.hashpw(user_password.encode(), bcrypt.gensalt()).decode()
-    user = authenticate(request, email=user_email, password = pw_hash)
-    if user is not None:
-        print('Line 40: User is not None')
-        login(request, user)
-        print('Made it to login')
-        return redirect('dashboard')
-    else:
-        print('Line 45: user is None')
-        messages.add_message(request, messages.INFO, 'Unable to login, please try again')
+    errors = User.objects.login_validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
         return redirect('show_login')
+    else:
+        user = User.objects.get(email=request.POST['email'])
+        print('User validated')
+        request.session['user_id'] = user.id
+        return redirect('dashboard')
 
 def logout_user(request):
     logout(request)

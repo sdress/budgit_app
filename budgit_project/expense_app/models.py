@@ -1,4 +1,3 @@
-from multiprocessing import Value
 from queue import Empty
 from django.db import models
 from users_app.models import User
@@ -49,7 +48,11 @@ class Expense(models.Model):
     objects = ExpenseManager()
 
     def get_choices():
-        return list(Expense.CATEGORIES)
+        choice_list = []
+        for choice in Expense.CATEGORIES:
+            print(choice)
+            choice_list.append(choice[1])
+        return choice_list
         # return Expense.get_category_display()
     
 
