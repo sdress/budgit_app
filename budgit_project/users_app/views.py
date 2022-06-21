@@ -12,7 +12,7 @@ def show_reg(request):
     return render(request, 'reg_form.html')
 
 def reg_user(request):
-    errors = User.objects.validator(request.POST)
+    errors = User.objects.reg_validator(request.POST)
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request,value)

@@ -38,8 +38,8 @@
             $ <input type="number" class="form-control" name="amount" value="{{exp.amount}}">
         </div>
         <div class="mb-3">
-            <label for="category">Select Category</label>
-            <select name="category">
+            <label for="category" class="form-control-label">Select Category</label>
+            <select name="category" class="form-control">
                 <option selected>{{exp.category}}</option>
                 {% for category in categories %}
                 <option>{{category}}</option>

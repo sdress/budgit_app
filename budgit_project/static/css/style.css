@@ -12,10 +12,10 @@
 	}
 
 #color-palette{
-    background-color: #9EB23B;
-    background-color: #C7D36F;
-    background-color: #FCF9C6;
-    background-color: #E0DECA;
+    background-color: #E5E3C9;
+    background-color: #B4CFB0;
+    background-color: #b4cfb0bb;
+    background-color: #94b49f;
 }
 
 body{
@@ -33,29 +33,33 @@ body{
 .jumbotron-fluid{
 	background-color: #B4CFB0;
 	margin-top: 5%;
-	padding: 2%;
+	padding: 5%;
 	border-radius: 2em;
 }
 
 .navbar {
-    background-color: #94b49f;	
+    background-color: #94b49fb7;	
 	margin-bottom: 2%;
 	padding: 2% 5%;
 }
 
 .table-container{
-	background-color: #B4CFB0;
+	background-color: #b4cfb0bb;
 	padding: 2em;
 	border-radius: 2em;
 }
 
 form {
-	background-color: #B4CFB0;
+	background-color: #b4cfb0bb;
 	padding: 2em;
 	border-radius: 2em;
+	margin-bottom: 5%;
 }
 
 .form-title{
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
 	margin-bottom: 2%;
 }
 
