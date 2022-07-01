@@ -32,6 +32,7 @@ def add_expense(request):
     return render(request, "expense_form.html", context)
 
 def create_expense(request):
+    print(request.POST)
     errors = Expense.objects.validator(request.POST)
     if len(errors) > 0:
         for key, value in errors.items():

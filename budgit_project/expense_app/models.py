@@ -12,7 +12,7 @@ class ExpenseManager(models.Manager):
             errors['name'] = 'Name must be at least 2 characters'
         if len(postData['amount']) < 1:
             errors['amount'] = 'Please input an amount'
-        if postData['recurring'] == None:
+        if not 'recurring' in postData:
             errors['recurring'] = 'Please make a selection'
         return errors
 
