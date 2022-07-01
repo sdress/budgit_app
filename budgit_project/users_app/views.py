@@ -18,11 +18,12 @@ def reg_user(request):
             messages.error(request,value)
         return redirect('show_reg')
     else:
+        pw_hash = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()).decode()
         user = User.objects.create(
             username = request.POST['username'],
             name = request.POST['name'],
             email = request.POST['email'],
-            password = request.POST['password']
+            password = pw_hash
         )
         user.is_active = True
         # user.set_password(request.POST['password'])
@@ -39,8 +40,10 @@ def login_user(request):
         for key, value in errors.items():
             messages.error(request, value)
         return redirect('show_login')
+    # if: user == none:
+    #   return redirect('')
     else:
-        user_check = authenticate(request, username=request.POST['username'], password=request.POST['password'])
+        user_check = authenticate(username=request.POST['username'], password=request.POST['password'])
         print(user_check)
         user = User.objects.get(email=request.POST['email'])
         # print(User.objects.get(id=1))

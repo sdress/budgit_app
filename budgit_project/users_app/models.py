@@ -1,6 +1,6 @@
 from django.db import models
 import re
-from django.contrib.auth.hashers import check_password
+import bcrypt
 
 # Create your models here.
 
@@ -29,6 +29,12 @@ class UserManager(models.Manager):
             errors['email'] = 'Please enter a valid email address'
         if len(postData['password']) < 8:
             errors['password'] = 'Password must be at least 8 characters.'
+        user = User.objects.get(email=postData['email'])
+        print(user)
+        if not user:
+            errors['email'] = 'Email not found'
+        if not bcrypt.checkpw(postData['password'].encode(), user.password.encode()):
+            errors['password'] = 'Password does not match'
         # print(user.password)
         # if check_password(postData['password'], user.password):
         #     print(check_password(postData['password'], user.password))
